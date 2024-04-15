@@ -14,7 +14,6 @@
                     </form>
                             <a href="" class="text-light fw-semibold text-decoration-none">Home</a>
                             <a href="" class="text-light fw-semibold text-decoration-none">Rommates</a>
-            
                 </div>
                 </nav>
 
@@ -22,26 +21,44 @@
 
 
         <section class="RoommateOffer">
-           <div class="d-flex justify-content-end me-5 mb-4">
-                <a href="{{route('addOffer')}}" class="btn  px-5 addoffer">Add New Offer </a>
+           <div class="d-flex justify-content-end me-5 mb-4 gap-2">
+                <a href="{{route('dashboardRoommates.create')}}" class="btn  px-5 addoffer">Add New Offer </a>
+                <a href="" class="btn  px-5 addoffer">View my profil </a>
 
-
-                
-
-                
             </div>
-            <div class="content container-fluid">
+            <div class="content container-fluid d-flex flex-wrap gap-5 justify-content-center">
+                @if($roommateOffers !== null)
+                        @foreach($roommateOffers as $offer)
                             <div class="card" style="width: 18rem;">
-                                <img src="..." class="card-img-top" alt="...">
+                                <img src="{{asset('images\teee.jpg')}}" class="card-img-top" alt="...">
+                                <!-- <img src="{{asset('images\vector.jpg')}}" class="card-img-top" alt="..."> -->
+
                                 <div class="card-body">
-                                    <h5 class="card-title text-light">Card title</h5>
-                                    <p class="card-text  text-light fw-bold">Some quick example text </p>
-                                    <p class="card-text  text-light fw-bold">Some quick example text </p>
+                                    <h5 class="card-title text-light">{{$user->name}}</h5>
+                                    <p class="card-text  text-light fw-bold">Budget: {{$offer->budget}} Dh</p>
+                                    @foreach($cities as $city)
+                                        @if($offer->citie_id == $city->id)
+                                            <p class="card-text  text-light fw-bold ">City: {{$city->name}}</p>
+                                        @endif
+                                    @endforeach
+                                    <div class="d-flex justify-content-between">
                                     <button href="" class="btn addoffer">Inactive</button>
-                                    <a href="#" class="btn addoffer">Modify</a>
-                                    <a href="#" class="btn addoffer">Delete</a>
+                                    <a href="{{ route('dashboardRoommates.edit', $offer->id)}}" class="btn addoffer">Modify</a>
+                                    <form action="{{ route('dashboardRoommates.destroy', $offer->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn addoffer">Delete</button>
+                                    </form>
+                                    </div>
                                 </div>
                             </div>
+
+                            @endforeach
+                    @else
+                    <div>
+                    <p>there's no offer yet</p>
+                    </div>
+                    @endif
 
 
 
@@ -49,6 +66,9 @@
         </section>
 
 </main>
+
+</section>
+
 
 <style>
 .content {
@@ -81,5 +101,6 @@
 
 }
 </style>
+
 
 @endsection('content')

@@ -9,10 +9,10 @@
 
 </head>
 <body>
-  <div class="parent d-flex justify-content-end bg-danger">
-    <div class="clip-halfcircle text-light text-end">
-      </div>
-  </div>
+
+  <img class="decorationimg" src="{{asset('images/ellipsedeco.png')}}" alt="">
+
+
   <section class="content container-fluid d-flex">      
   <nav class="navbar navbar-expand-lg w-100">
       <div class="container-fluid ">
@@ -37,25 +37,28 @@
     
     @extends('layouts.footer')
 
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 </html>
 
 <style>
   body{
-    background-color:rgba(0, 0, 0, 1);
+    /* background-color:rgba(0, 0, 0, 1); */
+    background-color:rgba(0, 0,0, 1)!important;
     position: relative;
+    
 
   }
+  .decorationimg{
+        position: absolute;
+        margin-left:36.4%;
+        margin-top:-5%;
+        z-index: -1;
+        /* padding:0px */
+    }
  
-  .clip-halfcircle{
-    position: absolute;
-    width:90%;
-    height:500px;
-    z-index: -1;
-    clip-path: circle(50.4% at 100% 1%);
-    background-image: radial-gradient(farthest-side, rgba(115, 45, 158, 1),rgba(115, 45, 158, 1));
-  }
+
   .content{
     position: relative;
     z-index: 1;

@@ -2,20 +2,22 @@
 @section('content')
 
 
+<section class="UpdateOffer container">
 
-
-<!-- <h1>add content</h1> -->
-
-<section class="AddOffer container">
-
-    <h3 class="text-light text-center text-decoration-underline">Let's find you a Roommate !</h3>
-
+    <h3 class="text-light text-center text-decoration-underline">Let's Update your Roommate Offer!</h3>
+    @if(session('Errorupdate'))
+    <div class="alert alert-danger" role="alert">
+        Something went wrong please try again
+    </div>
+    @endif
     <div class="d-flex">
 
+
     <div class="w-50">
-            <form class="container" action="{{route('dashboardRoommates.store')}}" method="post">
+    
+            <form class="container" action="{{route('dashboardRoommates.update',$offer->id )}}" method="post">
                     @csrf
-                    @Method('POST')
+                    @Method('Put')
                     <div class="mb-3">
                         <label  class="form-label text-light fw-bold">City :</label>
                         <select name="citie_id" class="w-100 py-2" id="citie_id">
@@ -27,7 +29,7 @@
 
                       <div class="mb-3">
                         <label  class="form-label text-light fw-bold">Desired area to live :</label>
-                        <input type="text" name="address" class="form-control" placeholder="Neighborhood" >
+                        <input type="text" name="address" value="{{$offer->address}}" class="form-control" placeholder="Neighborhood" >
 
                       </div>
 
@@ -41,9 +43,9 @@
                     </div>
                       
                         <div class="mb-3">
-                            <label  class="form-label text-light fw-bold ">Type of Room desire :</label>
+                            <label  class="form-label text-light fw-bold " >Type of Room desire :</label>
                                 <div class="ms-5">
-                                <input type="radio" id="roomtype" name="roomtype" value="1">
+                                <input type="radio" id="roomtype" name="roomtype"  value="1">
                                 <label for="html" class="text-light"  >Separate Room</label><br>
                                 <input type="radio" id="roomtype" name="roomtype" value="0">
                                 <label for="html" class="text-light">Shared Room</label><br>
@@ -54,12 +56,12 @@
 
                         <div class="mb-3">
                         <label  class="form-label text-light fw-bold">Your Budget in MAD :</label>
-                        <input type="number" name="budget" class="form-control" placeholder="Your budget" >
+                        <input type="number" name="budget" class="form-control" value="{{$offer->budget}}" placeholder="Your budget" >
                         </div>
 
                         <div class="mb-3">
                         <label class="form-label text-light fw-bold">How many Roommates you are looking for ?</label>
-                        <input type="number" name="numberofroommates" class="form-control" placeholder="Number of roommates desired" >
+                        <input type="number" name="numberofroommates" value="{{$offer->numberofroommates}}" class="form-control" placeholder="Number of roommates desired" >
                         </div>
 
                         <div class="mb-3">
@@ -81,8 +83,8 @@
                         <div class="mb-3">
                         <label  class="form-label text-light fw-bold">Gender preference for roommate :</label>
                         <select name="gender" class="w-100 py-2"id="gender">
-                            <option  value="1">Female</option>
                             <option  value="0">Male</option>
+                            <option  value="1">Female</option>
                         </select>
                         </div>
                 <div class="d-flex justify-content-center">
@@ -100,13 +102,10 @@
 
             </div>
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </section>
 
 <style>
-    .AddOffer{
+    .UpdateOffer{
     min-height: 100vh;
     background-color:rgba(115, 45, 158, 1);
     box-shadow: 0px 5px 60px 0px rgba(217, 217, 217, 1), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
@@ -122,11 +121,8 @@
         border-style: solid;
         border-color:rgba(217, 217, 217, 1);
     }
-    .AddOffer form input, .AddOffer form select{
+    .UpdateOffer form input, .UpdateOffer form select{
         background-color:rgba(240, 240, 240, 1);
-        /* color:#D8BFD8; */
-        /* rgba(240, 240, 240, 1) */
-        /* rgba(180, 180, 180, 1) */
     }
 </style>
 @endsection('content')

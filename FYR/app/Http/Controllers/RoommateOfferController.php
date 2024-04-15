@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Citie;
 use App\Models\HousingType;
 use App\Models\Roommateoffer;
+use App\Models\User;
+
+
 
 
 
@@ -16,21 +19,28 @@ class RoommateOfferController extends Controller
      */
     public function index()
     {
-        return view('dashboardRoommate');
-    }
-
-
-    public function viewaddoffer()
-    {
+        // dd('text');
+        $roommateOffers = Roommateoffer::where('user_id', session('id'))->get();
+        $user = User::where('id',session('id'))->first();
+        // dd($user);
         $cities = Citie::get();
-        $housingtypes = Housingtype::get();
-        return view('addOfferRoommate', compact([ 'cities','housingtypes']));
+        
 
+        // dd($roommateOffers[0]);
+        return view('dashboardRoommate', compact(['roommateOffers', 'user','cities']));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
      */
+
+     public function create(){
+        $cities = Citie::get();
+        $housingtypes = Housingtype::get();
+        return view('addOfferRoommate', compact([ 'cities','housingtypes']));
+     }
 
 
     /**
@@ -38,22 +48,32 @@ class RoommateOfferController extends Controller
      */
     public function store(Request $request)
     {
+        $dataValidator = $request->validate([
+                'citie_id' => ['required'],
+                'address' => ['required','string'],
+                'housingtype_id' => ['required'],
+                'roomtype' => ['required'],
+                'budget' => ['required'],
+                'numberofroommates' => ['required'],
+                'petperson' => ['required'],
+                'smoker' => ['required'],
+                'gender' => ['required']
+            ]);
         $ObjectRoommate = new Roommateoffer;
+        $ObjectRoommate->citie_id = $request->citie_id ;
         $ObjectRoommate->address = $request->address;
+        $ObjectRoommate->housingtype_id = $request->housingtype_id;
         $ObjectRoommate->roomtype = $request->roomtype ;
         $ObjectRoommate->budget = $request->budget ;
         $ObjectRoommate->numberofroommates = $request->numberofroommates;
         $ObjectRoommate->petperson = $request->petperson ;
         $ObjectRoommate->smoker = $request->smoker ;
         $ObjectRoommate->gender = $request->gender ;
-        $ObjectRoommate->user_id = $request->user_id;
-        $ObjectRoommate->citie_id = $request->citie_id ;
-        $ObjectRoommate->housingtype_id = $request->housingtype_id;
-
+        $ObjectRoommate->user_id = session('id');
+        $ObjectRoommate->isactive = 1;
         $ObjectRoommate->save();
 
-        return redirect()->back()->with('success', 'Your offer has been added successfuly');
-
+        return redirect()->route('dashboardRoommates.index')->with('success', 'Your offer has been added successfuly');
     }
 
     /**
@@ -61,7 +81,7 @@ class RoommateOfferController extends Controller
      */
     public function show(string $id)
     {
-        
+        return view('dashboardRoommate');
     }
 
     /**
@@ -69,7 +89,12 @@ class RoommateOfferController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $offer = Roommateoffer::where('id', $id)->first();
+        $cities = Citie::all();
+        $housingtypes = Housingtype::get();
+      
+        return view('modifyOfferRoommate', compact('offer', 'cities', 'housingtypes'));
+
     }
 
     /**
@@ -77,7 +102,25 @@ class RoommateOfferController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $updateOffer= Roommateoffer::find($id);
+        if($updateOffer !== null){
+            $updateOffer->update([
+                'citie_id' => $request->input('citie_id'),
+                'address' => $request->input('address'),
+                'housingtype_id' => $request->input('housingtype_id'),
+                'roomtype' => $request->input('roomtype'),
+                'budget' => $request->input('budget'),
+                'numberofroommates' => $request->input('numberofroommates'),
+                'petperson' => $request->input('petperson'),
+                'smoker'=> $request->input('smoker'),
+                'gender' => $request->input('gender'),
+                'isactive'=> 1,
+            ]);
+            return redirect()->route('dashboardRoommates.index')->with('success','Offer Updated Successfully');
+        }else{
+            return redirect()->back()->with('Errorupdate','Something Went wrong please try again');
+        }
+
     }
 
     /**
@@ -85,6 +128,10 @@ class RoommateOfferController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // dd('text');
+        $offer = Roommateoffer::find($id);
+        $offer->delete();
+        // dd($offer);
+        return redirect()->back()->with('item was deleted successfuly');
     }
 }

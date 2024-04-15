@@ -25,7 +25,8 @@ class Roommateoffer extends Model
         'gender',
         'user_id',
         'citie_id',
-        'housingtype_id'
+        'housingtype_id',
+        'isactive'
     ];
 
     

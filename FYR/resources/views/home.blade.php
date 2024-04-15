@@ -11,13 +11,13 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="{{asset('images/rhil.jpg')}}" class="d-block w-100" alt="...">
+                <img src="{{asset('images/rhil.jpg')}}" style="height:40rem" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="{{asset('images/chillinghome.jpg')}}" class="d-block w-100" alt="...">
+                <img src="{{asset('images/chillinghome.jpg')}}" style="height:40rem" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="{{asset('images/mask.jpg')}}" class="d-block w-100" alt="...">
+                <img src="{{asset('images/mask.jpg')}}" style="height:40rem" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
