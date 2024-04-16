@@ -4,7 +4,7 @@
 
 <a class="navbar-brand w-25 text-light fw-bold fs-1 mb-5" href="#">F<span style="color:rgba(115, 45, 158, 1)">Y</span>R</a>
 <div class="d-flex justify-content-end">
-<a href="" class="btn  px-5 registerbtn mb-5">Login </a>
+<a href="{{route('loginview')}}" class="btn  px-5 registerbtn mb-5">Login </a>
 </div>
 
         <div class="signupform mx-5 h-75 mb-3 ">
@@ -36,7 +36,7 @@
                         </select>
             </div>
             <div class="mb-3">
-                        <label  class="form-label text-light fw-bold">What do you want to use the app for ?</label>
+                        <label  class="form-label text-light fw-bold">Your gender:</label>
                         <select name="gender" class="role w-100 py-2 fw-bold form-control"id="gender" >
                             <option  name="gender"  value="0">Man</option>
                             <option name="gender"   value="1">Female</option>

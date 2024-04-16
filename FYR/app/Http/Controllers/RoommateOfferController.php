@@ -7,6 +7,7 @@ use App\Models\Citie;
 use App\Models\HousingType;
 use App\Models\Roommateoffer;
 use App\Models\User;
+use App\Http\Requests\RoommateOfferRequest;
 
 
 
@@ -20,9 +21,9 @@ class RoommateOfferController extends Controller
     public function index()
     {
         // dd('text');
-        $roommateOffers = Roommateoffer::where('user_id', session('id'))->get();
-        $user = User::where('id',session('id'))->first();
-        // dd($user);
+        $roommateOffers = Roommateoffer::where('user_id', auth()->user()->id)->get();
+        $user = User::where('id',auth()->user()->id)->first();
+        // dd($user->gender);
         $cities = Citie::get();
         
 
@@ -46,34 +47,18 @@ class RoommateOfferController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RoommateOfferRequest $request)
     {
-        $dataValidator = $request->validate([
-                'citie_id' => ['required'],
-                'address' => ['required','string'],
-                'housingtype_id' => ['required'],
-                'roomtype' => ['required'],
-                'budget' => ['required'],
-                'numberofroommates' => ['required'],
-                'petperson' => ['required'],
-                'smoker' => ['required'],
-                'gender' => ['required']
-            ]);
-        $ObjectRoommate = new Roommateoffer;
-        $ObjectRoommate->citie_id = $request->citie_id ;
-        $ObjectRoommate->address = $request->address;
-        $ObjectRoommate->housingtype_id = $request->housingtype_id;
-        $ObjectRoommate->roomtype = $request->roomtype ;
-        $ObjectRoommate->budget = $request->budget ;
-        $ObjectRoommate->numberofroommates = $request->numberofroommates;
-        $ObjectRoommate->petperson = $request->petperson ;
-        $ObjectRoommate->smoker = $request->smoker ;
-        $ObjectRoommate->gender = $request->gender ;
-        $ObjectRoommate->user_id = session('id');
-        $ObjectRoommate->isactive = 1;
-        $ObjectRoommate->save();
-        // dd($ObjectRoommate);
 
+        $dataValidator = $request->validated();
+
+        $ObjectRoommate = new Roommateoffer;
+        // dd(auth()->user());
+        // dd(session('user_id'));
+        $dataValidator['user_id']= auth()->user()->id;
+        $dataValidator['isactive']= 1;
+        $ObjectRoommate->fill($dataValidator);
+        $ObjectRoommate->save();
 
         return redirect()->route('dashboardRoommates.index')->with('success', 'Your offer has been added successfuly');
     }

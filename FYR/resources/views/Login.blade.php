@@ -4,7 +4,7 @@
 
 <a class="navbar-brand w-25 text-light fw-bold fs-1 mb-5" href="#">F<span style="color:rgba(115, 45, 158, 1)">Y</span>R</a>
 <div class="d-flex justify-content-end">
-<a href="" class="btn  px-5 registerbtn mb-5">Register </a>
+<a href="{{route('register')}}" class="btn  px-5 registerbtn mb-5">Register </a>
 </div>
         <div class="signupform mx-5 h-75 mb-3 ">
         

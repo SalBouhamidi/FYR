@@ -23,7 +23,7 @@
         <section class="RoommateOffer">
            <div class="d-flex justify-content-end me-5 mb-4 gap-2">
                 <a href="{{route('dashboardRoommates.create')}}" class="btn  px-5 addoffer">Add New Offer </a>
-                <a href="" class="btn  px-5 addoffer">View my profil </a>
+                <a href="{{route('show.profil')}}" class="btn  px-5 addoffer">View my profil </a>
 
             </div>
             <div class="content container-fluid d-flex flex-wrap gap-5 justify-content-center">
@@ -32,9 +32,9 @@
                             <div class="card" style="width: 21rem;">
 
                             @if($user->gender === 0)
-                                <img src="{{asset('images\boy.jpg')}}" class="card-img-top" alt="...">
+                                <img src="{{asset('images\boy.png')}}" class="card-img-top" alt="...">
                             @elseif($user->gender === 1)
-                                <img src="{{asset('images\girl.jpg')}}" class="card-img-top" alt="...">
+                                <img src="{{asset('images\girl.png')}}" class="card-img-top" alt="...">
                             @endif
                                 <div class="card-body">
                                     

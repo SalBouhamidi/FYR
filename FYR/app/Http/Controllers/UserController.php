@@ -2,28 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
+
+
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    // {
+    //     return view('register');
+    // }
+
+    public function registerView()
     {
         return view('register');
     }
+    
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function show(){
+        $user = User::find(session('id'));
+        return view('viewprofil', compact(['user']));
+
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,10 +59,7 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
                 'role_id' => $request->role_id,
                 'gender' =>$request->gender
-
-            ]);
-            // dd($user);
-
+            ]); 
             session([
                 'name' => $user->name,
                 'role_id' =>$user->role_id,
@@ -124,9 +132,22 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
-        //
+
+        $user= User::findOrFail($id);
+        $dataValidator = $request->validated();
+        if($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('uploads', 'public');
+            $dataValidator['image'] = $imagePath;
+        }
+        // dd($request->image);
+        $user->fill($dataValidator);
+        // dd($user);
+        $user->save();
+        // dd( $user);
+        return back()->with('Success', 'Your profil has been updated');
+        
     }
 
     /**

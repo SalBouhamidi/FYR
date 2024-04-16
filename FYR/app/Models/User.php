@@ -23,7 +23,11 @@ class User extends Authenticatable
         'password',
         'role_id',
         'image',
-        'gender'
+        'gender',
+        'about',
+        'localisation',
+        'phone',
+        'whatssap'
     ];
 
     public function Roommateoffers(): HasMany
