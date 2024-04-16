@@ -35,6 +35,13 @@
                             <option name="role_id" id="role_id" value="3">Renting my proprety</option>
                         </select>
             </div>
+            <div class="mb-3">
+                        <label  class="form-label text-light fw-bold">What do you want to use the app for ?</label>
+                        <select name="gender" class="role w-100 py-2 fw-bold form-control"id="gender" >
+                            <option  name="gender"  value="0">Man</option>
+                            <option name="gender"   value="1">Female</option>
+                        </select>
+            </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-submit text-light fw-semibold px-4">Sign up</button>
             </div>

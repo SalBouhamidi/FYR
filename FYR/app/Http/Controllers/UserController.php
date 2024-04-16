@@ -35,7 +35,9 @@ class UserController extends Controller
             'name' => 'required', 'max:50',
             'email' => 'required', 'unique:User',
             'password' =>'required',
-            'role_id'=> 'required'
+            'role_id'=> 'required',
+            'gender' => 'required'
+
         ]);
 
 
@@ -45,6 +47,8 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role_id' => $request->role_id,
+                'gender' =>$request->gender
+
             ]);
             // dd($user);
 
@@ -86,7 +90,7 @@ class UserController extends Controller
   
             $validatedata = $request->validate([
                 'email' => 'required',
-                'password' =>'required'
+                'password' =>'required',
             ]);
 
         if(Auth::attempt($validatedata)){
@@ -94,7 +98,6 @@ class UserController extends Controller
                 'name' => $user->name,
                 'role_id' =>$user->role_id,
                 'id' =>$user->id,
-
             ]);
             // dd($user->role_id);
             if($user->role_id == 2){

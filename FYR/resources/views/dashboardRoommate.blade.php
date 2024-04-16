@@ -29,25 +29,40 @@
             <div class="content container-fluid d-flex flex-wrap gap-5 justify-content-center">
                 @if($roommateOffers !== null)
                         @foreach($roommateOffers as $offer)
-                            <div class="card" style="width: 18rem;">
-                                <img src="{{asset('images\teee.jpg')}}" class="card-img-top" alt="...">
-                                <!-- <img src="{{asset('images\vector.jpg')}}" class="card-img-top" alt="..."> -->
+                            <div class="card" style="width: 21rem;">
 
+                            @if($user->gender === 0)
+                                <img src="{{asset('images\boy.jpg')}}" class="card-img-top" alt="...">
+                            @elseif($user->gender === 1)
+                                <img src="{{asset('images\girl.jpg')}}" class="card-img-top" alt="...">
+                            @endif
                                 <div class="card-body">
+                                    
                                     <h5 class="card-title text-light">{{$user->name}}</h5>
-                                    <p class="card-text  text-light fw-bold">Budget: {{$offer->budget}} Dh</p>
+                                    <p class="card-text  text-light fw-bold">Budget:{{$offer->budget}} Dh</p>
                                     @foreach($cities as $city)
                                         @if($offer->citie_id == $city->id)
-                                            <p class="card-text  text-light fw-bold ">City: {{$city->name}}</p>
+                                            <p class="card-text  text-light fw-bold ">City:{{$city->name}}</p>
                                         @endif
                                     @endforeach
                                     <div class="d-flex justify-content-between">
-                                    <button href="" class="btn addoffer">Inactive</button>
-                                    <a href="{{ route('dashboardRoommates.edit', $offer->id)}}" class="btn addoffer">Modify</a>
+                                    <form method="post" action="{{route('dashboardRoommates.activation', $offer->id)}}">
+                                        @csrf
+                                        @Method('Put')
+                                        @if($offer->isactive == 1)
+                                        <button type="submit" class="btn addoffer"><i class="fa-solid fa-circle fa-fade" style="color: #03dd9c;"></i> Active</button>
+                                        @elseif($offer->isactive === 0)
+                                        <button type="submit" class="btn addoffer"><i class="fa-solid fa-circle fa-fade" style="color: #f50049;"></i> Inactive</button>
+                                        @endif
+
+                                    </form>
+
+
+                                    <a href="{{ route('dashboardRoommates.edit', $offer->id)}}" class="btn addoffer px-4">Modify</a>
                                     <form action="{{ route('dashboardRoommates.destroy', $offer->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn addoffer">Delete</button>
+                                        <button type="submit" class="btn addoffer px-4">Delete</button>
                                     </form>
                                     </div>
                                 </div>
@@ -82,6 +97,8 @@
 .btn_search, .addoffer{
     color:rgba(115, 45, 158, 1);
     background-color:rgba(217, 217, 217, 1);
+    box-shadow: 0 0 15px #6f58da;
+
 }
 .btn_search:hover, .addoffer:hover{
     color:rgba(217, 217, 217, 1);
@@ -98,7 +115,14 @@
 }
 .card{
     background-color:rgba(115, 45, 158, 1);
+    transform: scale(1);
 
+}
+
+.card:hover{
+    transform: scale(1.05);
+    border-style: solid;
+    border-color:rgba(217, 217, 217, 1);
 }
 </style>
 

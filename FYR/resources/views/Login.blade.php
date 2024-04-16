@@ -37,6 +37,7 @@
     background-image: linear-gradient(143.97deg, rgba(115, 45, 158, 1), #100b28);
     border: 1px solid rgba(170, 125, 252, .25);
     border-radius: 16px;
+
 }
 .role{
     color:rgba(115, 45, 158, 1);
@@ -45,13 +46,14 @@
 .registerbtn, .btn-submit{
     color:rgba(115, 45, 158, 1) !important;
     background-color:rgba(217, 217, 217, 1);
-    box-shadow: 0 0 15px #6f58da;
+    box-shadow: 0 0 15px #6f58da;  
 }
 .registerbtn:hover, .btn-submit:hover{
     color:rgba(217, 217, 217, 1) !important;
     background-color:rgba(115, 45, 158, 1);
     border-style: solid;
     border-color:rgba(217, 217, 217, 1);
+    
 }
 input::placeholder{
   font-weight: bold;

@@ -11,8 +11,9 @@ Route::get('/', function () {
 });
 Route::resource('home', RentOfferController::class);
 
-// Route::resource('/dashboardRoommates', RoommateOfferController::class);
+Route::put('dashboardRoommates/activation/{id}', [RoommateOfferController::class, 'activation'])->name('dashboardRoommates.activation');
 Route::resource('dashboardRoommates', RoommateOfferController::class);
+
 Route::get('register', [UserController::class, 'index']);
 Route::post('register', [UserController::class, 'store'])->name('register');
 Route::get('login', [UserController::class, 'loginview'])->name('loginview');

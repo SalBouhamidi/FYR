@@ -72,6 +72,8 @@ class RoommateOfferController extends Controller
         $ObjectRoommate->user_id = session('id');
         $ObjectRoommate->isactive = 1;
         $ObjectRoommate->save();
+        // dd($ObjectRoommate);
+
 
         return redirect()->route('dashboardRoommates.index')->with('success', 'Your offer has been added successfuly');
     }
@@ -132,6 +134,22 @@ class RoommateOfferController extends Controller
         $offer = Roommateoffer::find($id);
         $offer->delete();
         // dd($offer);
-        return redirect()->back()->with('item was deleted successfuly');
+        return redirect()->back()->with('success','item was deleted successfuly');
     }
+
+    public function activation(string $id){
+        $offer = Roommateoffer::find($id);
+            $offer->update([
+                'isactive'=> !$offer->isactive,
+            ]); 
+            if($offer->isactive){
+                return  redirect()->back()->with('success','Your offer is activited successfully');
+            }else{
+                return  redirect()->back()->with('success','Your offer has been deactivited successfully');
+ 
+            }
+        
+        }
+
+    
 }
