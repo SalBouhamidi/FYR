@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Citie;
-use App\Models\Housingtype;
-use App\Models\Specificfourniture;
+use App\Models\specificfourniture;
+use App\Http\Requests\StorespecificfournitureRequest;
+use App\Http\Requests\UpdatespecificfournitureRequest;
 
-class RentOfferController extends Controller
+class SpecificfournitureController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -22,24 +21,21 @@ class RentOfferController extends Controller
      */
     public function create()
     {
-        $cities= Citie::get();
-        $houstingTypes= Housingtype::get();
-        $specialFeatures = Specificfourniture::get();
-        return view('createLessoroffer', compact(['cities','houstingTypes','specialFeatures']));
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorespecificfournitureRequest $request)
     {
-        
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(specificfourniture $specificfourniture)
     {
         //
     }
@@ -47,7 +43,7 @@ class RentOfferController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(specificfourniture $specificfourniture)
     {
         //
     }
@@ -55,7 +51,7 @@ class RentOfferController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatespecificfournitureRequest $request, specificfourniture $specificfourniture)
     {
         //
     }
@@ -63,7 +59,7 @@ class RentOfferController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(specificfourniture $specificfourniture)
     {
         //
     }

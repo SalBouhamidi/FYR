@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Roommateoffer;
+use App\Models\Propretie;
 
 
 class Housingtype extends Model
@@ -19,5 +20,9 @@ class Housingtype extends Model
     public function Roommateoffers(): HasMany
     {
         return $this->hasMany(Roommateoffer::class);
+    }
+    public function Propretie(): HasMany
+    {
+        return $this->hasMany(Propretie::class);
     }
 }

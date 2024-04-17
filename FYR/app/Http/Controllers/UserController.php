@@ -15,10 +15,6 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     return view('register');
-    // }
 
     public function registerView()
     {
@@ -68,7 +64,7 @@ class UserController extends Controller
             ]);
             // dd(session());
             if($user){
-                return redirect('/home')->with('succes', 'you have been registred successfully');
+                return redirect('/login')->with('succes', 'you have been registred successfully, Please log in');
             }else{
                 return redirect('/register')->with('error', 'something went wrong');
             }
@@ -115,7 +111,6 @@ class UserController extends Controller
             }
 
         }else{
-            dd('im in else');
             return back()->with('Error','Invalid email or password');
         }
 

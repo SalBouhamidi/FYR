@@ -6,7 +6,7 @@
             <div class="col-md-4">
                 @if($user->image !== null)
                 <img src="{{asset('storage/'.$user->image)}}" class="img-fluid rounded-start"  alt="Image of user">
-                @else
+                @elseif($user->image === null)
                     @if($user->gender === 1)
                         <img src="{{asset('images\girl.png')}}" class="img-fluid rounded-start" alt="image of vector">
                     @elseif($user->gender === 0)
@@ -48,13 +48,14 @@
                     @endif
                     <p class="card-text  ms-4 fw-bold" style="color: #000000;"><i class="fa-solid fa-envelope" style="color: #000000;"></i> Email : {{$user->email}}</p>
                     @if($user->whatssap !== null)
-                    <p class="card-text ms-4 fw-bold"  style="color: #000000;"><i class="fa-solid fa-phone" style="color: #000000;"></i> Your whatssap : {{$user->whatssap}}</p>
+                    <p class="card-text ms-4 fw-bold"  style="color: #000000;"><i class="fa-solid fa-phone" style="color: #000000;"></i> Your whatssap : 
+                    <a class="card-text ms-4 fw-bold" target="_blank" style="color: #000000;" href="https://wa.me/{{$user->whatssap}}">{{$user->whatssap}}</a>
                     @elseif($user->phone == null)
                     <p class="card-text ms-4 fw-bold"  style="color: #000000;"><i class="fa-solid fa-phone" style="color: #000000;"></i> Your whatssap : Add your whatssap number to make it easy on Roommate to contact you</p>
                     @endif
            
                     <!-- Button trigger modal -->
-            <button type="button" class="btn btn-update" data-bs-toggle="modal" data-bs-target="#exampleModal{{$user->id}}">
+            <button type="button" class="btn btn-update d-block mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal{{$user->id}}">
                 <i class="fa-solid fa-pen"></i> Update
             </button>
 

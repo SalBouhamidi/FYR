@@ -19,6 +19,9 @@
             <div class="mb-3 ">
                 <label for="exampleInputEmail1" class="form-label fs-5">Email address</label>
                 <input type="email" name="email" class="form-control" id="exampleInputEmail1"  placeholder="Example azerty@gmail.com..." aria-describedby="emailHelp">
+                @error('email')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label fs-5">Password</label>

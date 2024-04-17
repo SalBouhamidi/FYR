@@ -34,6 +34,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Roommateoffer::class);
     }
+    public function Propreties()
+    {
+        return $this->belongsToMany(Propretie::class, 'reservation');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

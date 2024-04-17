@@ -33,10 +33,6 @@ class RoommateOfferController extends Controller
 
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
-
      public function create(){
         $cities = Citie::get();
         $housingtypes = Housingtype::get();
@@ -49,12 +45,10 @@ class RoommateOfferController extends Controller
      */
     public function store(RoommateOfferRequest $request)
     {
-
         $dataValidator = $request->validated();
 
         $ObjectRoommate = new Roommateoffer;
-        // dd(auth()->user());
-        // dd(session('user_id'));
+
         $dataValidator['user_id']= auth()->user()->id;
         $dataValidator['isactive']= 1;
         $ObjectRoommate->fill($dataValidator);
