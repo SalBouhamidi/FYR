@@ -9,6 +9,14 @@ use App\Models\Propretie;
 class Image extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
+    
+    protected $fillable=[
+        'id',
+        'image',
+        'propretie_id'
+    ];
 
     public function Propretie(): BelongsTo
     {

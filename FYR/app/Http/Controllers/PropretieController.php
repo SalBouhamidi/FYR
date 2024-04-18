@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\propretie;
+use App\Models\Propretie;
 use App\Models\Citie;
 use App\Models\Housingtype;
 use App\Models\Specificfourniture;
-use App\Http\Requests\StorepropretieRequest;
+use App\Models\Propreties_specificfourniture;
+use App\Models\Image;
+use Illuminate\Support\File;
+use DB;
+
+
+
+
+use Illuminate\Http\Request;
+
 
 
 class PropretieController extends Controller
@@ -16,7 +25,9 @@ class PropretieController extends Controller
      */
     public function index()
     {
-        //
+        $proporeties= Propretie::where('user_id', auth()->user()->id)->get();
+        dd($proporeties[0]->Images);
+        return view('dashboardLessor', compact(['proporeties']));
     }
 
     /**
@@ -33,16 +44,45 @@ class PropretieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorepropretieRequest $request)
+    public function store(Request $request)
     {
-        dd('text');
-        $dataValidator = $request->validated();
+        $dataValidator = $request->validate([
+            'name'=> 'required|string',
+            'description' => 'required|string|min:5',
+            'address'=> 'required|string',
+            'price'=> 'required',
+            'equipped'=>'required',
+            'surfacearea'=> 'required',
+            'citie_id'=>'required',
+            'housingtype_id'=> 'required',
+
+        ]);
+
         $objectProprety = new propretie;
         $dataValidator['user_id']=auth()->user()->id;
         $objectProprety->fill($dataValidator);
         $objectProprety->save();
-        dd($objectProprety);
 
+            $specialFeatures = $request->input('specialFeatures');
+            foreach($specialFeatures as $specialFeature){
+                $objectPSpecificfourniture = new Propreties_specificfourniture;
+                $objectPSpecificfourniture->propretie_id = $objectProprety->id;
+                $objectPSpecificfourniture->specificfourniture_id = $specialFeature;
+                $objectPSpecificfourniture->save();
+            }
+  
+        foreach($request->file('images') as $image){
+            $objectImage= new Image;
+            $objectImage->propretie_id = $objectProprety->id;
+            $objectImage->image= $image->store('/images/resource', ['disk' => 'my_files']);
+            $objectImage->save();
+        }
+
+        if($objectProprety !== null ){
+            return redirect()->route('dashboardLessor.index')->with('success', 'Your offer added successfully');
+        }else{
+            return redirect()->route('dashboardLessor.index')->with('error', 'Something wrong happened please try to add your offer again');
+        }
 
     }
 

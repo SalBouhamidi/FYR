@@ -10,6 +10,11 @@ class specificfourniture extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'id',
+        'name'
+    ];
+
     public function Propreties()
     {
         return $this->belongsToMany(Propretie::class, 'reservation');

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class propreties_specificfourniture extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable =[
+        'id',
+        'propretie_id',
+        'specificfourniture_id'
+    ];
 }

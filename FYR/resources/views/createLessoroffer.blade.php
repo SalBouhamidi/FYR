@@ -13,7 +13,7 @@
     <div class="d-flex">
 
     <div class="w-50">
-            <form class="container" action="{{route('dashboardLessor.store')}}" method="post">
+            <form class="container" enctype='multipart/form-data'  action="{{route('dashboardLessor.store')}}" method="post">
                     @csrf
                     @Method('POST')
                     <div class="mb-3">
@@ -86,7 +86,7 @@
                         <label  class="form-label text-light fw-bold"><i class="fa-solid fa-building" style="color: #ffffff;"></i> City :</label>
                         <select name="citie_id" class="w-100 py-2" id="citie_id">
                             @foreach($cities as $city)
-                            <option name="citie_id" >{{$city->name}}</option>
+                            <option name="citie_id" value="{{$city->id}}" >{{$city->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -100,7 +100,7 @@
                         <label  class="form-label text-light fw-bold"><i class="fa-solid fa-house-chimney-user" style="color: #f7f7f7;"></i> Housing :</label>
                         <select name="housingtype_id" class="w-100 py-2" id="housingtype_id">
                             @foreach($houstingTypes as $houstingtype)
-                            <option name="housingtype_id" >{{$houstingtype->name}}</option>
+                            <option name="housingtype_id"  value="{{$houstingtype->id}}" >{{$houstingtype->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -111,16 +111,28 @@
                     </div>
                     @enderror
 
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label  class="form-label text-light fw-bold"><i class="fa-solid fa-house-chimney-user" style="color: #f7f7f7;"></i> Special features :</label>
                         @foreach($specialFeatures as $specialFeature)
                         <div>
-                            <input class="text-light" type="checkbox" id="specificfourniture_id" name="specificfourniture_id" checked />
-                            <label class="text-light fw-bold" value="{{$specialFeature->id}}" name="specificfourniture_id"  for="specialfourniture">{{$specialFeature->name}}</label>
+                            <input class="text-light" type="checkbox" name="specialFeatures[]" id="{{$specialFeature->id}}" value="{{$specialFeature->id}}"   multiple />
+                            <label class="text-light fw-bold" for="{{$specialFeature->id}}"  name="specialfeatures"  >{{$specialFeature->name}}</label>
                         </div>
                         @endforeach
-
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" name="images[]" accept="image/*" multiple="multiple">
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                    </div>
+                    <!-- @error('image')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     </div> -->
+
+
+
+
 
                 <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-submit mb-4 ms-5 px-5">Submit</button>

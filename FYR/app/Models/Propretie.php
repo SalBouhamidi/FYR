@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Citie;
 use App\Models\Image;
@@ -12,6 +13,18 @@ use App\Models\Specificfourniture;
 class Propretie extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'id',
+        'name',
+        'description',
+        'address',
+        'price',
+        'equipped',
+        'surfacearea',
+        'housingtype_id',
+        'citie_id',
+        'user_id'
+    ];
 
     public function Citie(): BelongsTo
     {

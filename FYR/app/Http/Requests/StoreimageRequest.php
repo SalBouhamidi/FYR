@@ -11,7 +11,7 @@ class StoreimageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreimageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'image'=> 'string | required',
+            'propretie_id'=>'required'
+
         ];
     }
 }

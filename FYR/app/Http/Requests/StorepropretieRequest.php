@@ -25,12 +25,11 @@ class StorepropretieRequest extends FormRequest
             'name'=> 'required|string',
             'description' => 'required|string|min:5',
             'address'=> 'required|string',
-            'price'=> 'numeric',
+            'price'=> 'required',
             'equipped'=>'required',
             'surfacearea'=> 'required',
-            'housingtype_id'=> 'required',
             'citie_id'=>'required',
-            'user_id'=>'required'
+            'housingtype_id'=> 'required',
         ];
     }
 }
