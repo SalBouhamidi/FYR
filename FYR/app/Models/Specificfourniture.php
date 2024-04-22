@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Propretie;
 
@@ -17,7 +18,7 @@ class specificfourniture extends Model
 
     public function Propreties()
     {
-        return $this->belongsToMany(Propretie::class, 'reservation');
+        return $this->belongsToMany(Propretie::class);
     }
 
 }

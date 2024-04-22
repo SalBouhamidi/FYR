@@ -69,14 +69,39 @@
             <p class="fw-bold text-decoration-underline ">See more</p>
         </div>
 
-        <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        </div>
+        <div class="content container-fluid d-flex flex-wrap gap-5 justify-content-center">
+                @if($Rommates !== null)
+                        @foreach($Rommates as $offer)
+                            <div class="card" style="width: 21rem;">
+
+                            @if($offer->user->gender === 0)
+                                <img src="{{asset('images\boy.png')}}" class="card-img-top" alt="user image">
+                            @elseif($offer->user->gender === 1)
+                                <img src="{{asset('images\girl.png')}}" class="card-img-top" alt="user image">
+                            @endif
+                                <div class="card-body">
+                                    <h5 class="card-title text-light">{{$offer->user->name}}</h5>
+                                    <p class="card-text  text-light fw-bold">Budget:{{$offer->budget}} Dh</p>
+                                    @foreach($cities as $city)
+                                        @if($offer->citie_id == $city->id)
+                                            <p class="card-text  text-light fw-bold">City:{{$city->name}}</p>
+                                        @endif
+                                    @endforeach
+                                    <div class="d-flex justify-content-center">
+                                            <a href="" class="btn  px-5 addoffer">View more</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @endforeach
+                    @else
+                    <div>
+                    <p>there's no offer yet</p>
+                    </div>
+                    @endif
+
+            </div>
+
 
 </section>
 
@@ -86,14 +111,51 @@
             <p class="fw-bold text-decoration-underline ">See more</p>
         </div>
 
-        <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        </div>
+
+
+        <div class="content container-fluid d-flex flex-wrap gap-5 justify-content-center">
+                @if($Propreties !== null)
+                        @foreach($Propreties as $proprety)
+                        <div class="card" style="width: 21rem;">
+
+                            <div id="carouselExampleAutoplaying{{$proprety->id}}" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @foreach($proprety->images as $indexImg => $image)
+                                    <div class="carousel-item {{$image->id}} {{$indexImg == 0 ? 'active' : ''}}  h-50">
+                                        <img src="{{asset($image->image)}}"  class="d-block w-100 card-img-top" style="height:18rem;" alt="Rent propriety">
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleAutoplaying{{$proprety->id}}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleAutoplaying{{$proprety->id}}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>                                
+                        <div class="card-body">    
+                                    <h5 class="card-title text-light">{{$proprety->name}}</h5>
+                                    <p class="card-text  text-light fw-bold">Address:{{$proprety->address}}, {{$proprety->citie->name}}</p>
+                                    <p class="card-text  text-light fw-bold">Price:{{$proprety->price}} Dh</p>
+                                    <div class="d-flex justify-content-center">
+                                            <a href="{{route('home.show', $proprety->id)}}" class="btn  px-5 addoffer">View more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                    @else
+                    <div>
+                    <p>there's no offer yet</p>
+                    </div>
+                    @endif
+
+            </div>
+           
+
 
 </section>
 <section class="endingtext mt-3 w-100 d-flex justify-content-center mb-5">
@@ -133,6 +195,36 @@
     }
     .spanLogo{
         color:rgba(115, 45, 158, 1);
+    }
+    .form-control {
+        background-color: rgba(217, 217, 217, 1);
+    }
+
+    .RoommateOffer {
+        min-height: 150vh;
+    }
+
+    .card {
+        background-color: rgba(115, 45, 158, 1);
+        transform: scale(1);
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        border-style: solid;
+        border-color: rgba(217, 217, 217, 1);
+    }
+    .addoffer{
+        color:rgba(115, 45, 158, 1);
+        background-color:rgba(217, 217, 217, 1);
+        box-shadow: 0 0 15px #6f58da;
+
+    }
+    .addoffer:hover{
+        color:rgba(217, 217, 217, 1);
+        background-color:rgba(115, 45, 158, 1);
+        border-style: solid;
+        border-color:rgba(217, 217, 217, 1);
     }
 </style>
 

@@ -87,8 +87,8 @@
 
 <style>
 .content {
-    min-height: calc(100% ); /* Adjust 50px to match your footer height */
-    padding-bottom: 50px; /* Same as footer height */
+    min-height: calc(100% ); 
+    padding-bottom: 50px; 
 }
 .navbarsearch{
         background: linear-gradient(rgba(115, 45, 158, 1), rgba(0, 0, 0, 1));

@@ -10,6 +10,8 @@ use App\Http\Controllers\RentOfferController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('reservation/{id}', [RentOfferController::class, 'reservation'])->name('reservation.proprety');
 Route::resource('home', RentOfferController::class);
 
 Route::put('dashboardRoommates/activation/{id}', [RoommateOfferController::class, 'activation'])->name('dashboardRoommates.activation');

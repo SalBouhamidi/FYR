@@ -49,8 +49,7 @@
     /* background-color:rgba(0, 0, 0, 1); */
     background-color:rgba(0, 0,0, 1)!important;
     position: relative;
-    
-
+    overflow-x:hidden !important;
   }
   .decorationimg{
         position: absolute;

@@ -7,7 +7,7 @@ use App\Models\Propretie;
 use App\Models\Citie;
 use App\Models\Housingtype;
 use App\Models\Specificfourniture;
-use App\Models\Propreties_specificfourniture;
+use App\Models\propretie_specificfourniture;
 use App\Models\Image;
 use Illuminate\Support\File;
 
@@ -68,7 +68,7 @@ class PropretieController extends Controller
 
             $specialFeatures = $request->input('specialFeatures');
             foreach($specialFeatures as $specialFeature){
-                $objectPSpecificfourniture = new Propreties_specificfourniture;
+                $objectPSpecificfourniture = new propretie_specificfourniture;
                 $objectPSpecificfourniture->propretie_id = $objectProprety->id;
                 $objectPSpecificfourniture->specificfourniture_id = $specialFeature;
                 $objectPSpecificfourniture->save();
@@ -106,7 +106,7 @@ class PropretieController extends Controller
         $houstingTypes= Housingtype::get();
         $specialFournitures = Specificfourniture::get();
         $proporetie= Propretie::where('id', $id)->first();
-        $fournituresofPropritie= Propreties_specificfourniture::where('propretie_id', $id)->get();
+        $fournituresofPropritie= propretie_specificfourniture::where('propretie_id', $id)->get();
         $images= Image::where('propretie_id', $id)->get();
         return view('modifyProprety', compact('cities','houstingTypes','specialFournitures','proporetie','images','fournituresofPropritie'));
 
@@ -149,14 +149,14 @@ class PropretieController extends Controller
         $proprety->save();
         
         $speacialFournitures = $request->input('specialFourniture');
-        $PreviousSpecialFournitures= Propreties_specificfourniture::where('propretie_id',$id)->get();
+        $PreviousSpecialFournitures= propretie_specificfourniture::where('propretie_id',$id)->get();
         foreach($PreviousSpecialFournitures as $previous){
             $previous->delete();
         }
         // dd($speacialFournitures);
         $specialFeatures = $request->input('specialFournitures');
         foreach($specialFeatures as $specialFeature){
-            $objectPSpecificfourniture = new Propreties_specificfourniture;
+            $objectPSpecificfourniture = new Propretie_specificfourniture;
             $objectPSpecificfourniture->propretie_id = $proprety->id;
             $objectPSpecificfourniture->specificfourniture_id = $specialFeature;
             $objectPSpecificfourniture->save();
@@ -184,7 +184,7 @@ class PropretieController extends Controller
         if($proporetie->trashed() == false){
             return back()->with('error', 'something went wrong please try again');
         }else{
-            return back()->with('success', 'Proprety was created successfully');
+            return back()->with('success', 'Proprety was deleted successfully');
         }
     }
 }
