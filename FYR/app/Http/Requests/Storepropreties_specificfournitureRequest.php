@@ -22,7 +22,8 @@ class Storepropreties_specificfournitureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+         'specificfourniture_id'=> 'numeric',
+         'propretie_id'=>'numeric'   
         ];
     }
 }

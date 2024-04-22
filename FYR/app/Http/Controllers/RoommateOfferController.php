@@ -73,7 +73,6 @@ class RoommateOfferController extends Controller
         $offer = Roommateoffer::where('id', $id)->first();
         $cities = Citie::all();
         $housingtypes = Housingtype::get();
-      
         return view('modifyOfferRoommate', compact('offer', 'cities', 'housingtypes'));
 
     }
@@ -121,7 +120,7 @@ class RoommateOfferController extends Controller
             $offer->update([
                 'isactive'=> !$offer->isactive,
             ]); 
-            if($offer->isactive){
+            if($offer->isactive == 1){
                 return  redirect()->back()->with('success','Your offer is activited successfully');
             }else{
                 return  redirect()->back()->with('success','Your offer has been deactivited successfully');

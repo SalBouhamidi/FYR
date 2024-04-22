@@ -11,7 +11,7 @@ class UpdatepropretieRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdatepropretieRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=> 'required|string',
+            'description' => 'required|string|min:5',
+            'address'=> 'required|string',
+            'price'=> 'required',
+            'equipped'=>'required',
+            'surfacearea'=> 'required',
+            'citie_id'=>'required',
+            'housingtype_id'=> 'required',
         ];
     }
 }

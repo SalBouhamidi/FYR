@@ -28,51 +28,47 @@
 
                 @foreach ($proporeties as $proprety)
                     <div class="card" style="width: 21rem;">
-
-
-                        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                        <div id="carouselExampleAutoplaying{{$proprety->id}}" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="..." class="d-block w-100" alt="...">
+                                @foreach($proprety->images as $indexImg => $image)
+                                <div class="carousel-item {{$image->id}} {{$indexImg == 0 ? 'active' : ''}}  h-50">
+                                    <img src="{{asset($image->image)}}"  class="d-block w-100 card-img-top" style="height:18rem;" alt="Rent propriety">
                                 </div>
-                                <div class="carousel-item">
-                                    <img src="..." class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="..." class="d-block w-100" alt="...">
-                                </div>
+                                @endforeach
                             </div>
                             <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                                data-bs-target="#carouselExampleAutoplaying{{$proprety->id}}" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
                             <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                                data-bs-target="#carouselExampleAutoplaying{{$proprety->id}}" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-
-
-
-
-                        <img src="{{ asset('images\girl.png') }}" class="card-img-top" alt="...">
-
-
-
 
                         <div class="card-body">
                             <h5 class="card-title text-light">{{ $proprety->name }}</h5>
                             <p class="card-text  text-light fw-bold">Address: {{ $proprety->address }}</p>
                             <p class="card-text  text-light fw-bold ">Price: {{ $proprety->price }}</p>
                             <div class="d-flex justify-content-between">
-                                <form method="post" action="">
+                                <form method="post" action="{{route('dashboardLessor.activation',$proprety->id)}}">
+                                    @csrf
+                                    @Method('PUT')
+
+                                    @if($proprety->isactive == 1)
                                     <button type="submit" class="btn addoffer"><i class="fa-solid fa-circle fa-fade"
                                             style="color: #03dd9c;"></i> Active</button>
+                                    @elseif($proprety->isactive == 0)
+                                        <button type="submit" class="btn addoffer"><i class="fa-solid fa-circle fa-fade" style="color: #f50049;"></i> Inactive</button>
+                                    
+                                    @endif
                                 </form>
-                                <a href="" class="btn addoffer px-4">Modify</a>
-                                <form action="" method="POST">
+                                <a href="{{route('dashboardLessor.edit', $proprety->id)}}" class="btn addoffer px-4">Modify</a>
+                                <form action="{{route('dashboardLessor.destroy',$proprety->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
                                     <button type="submit" class="btn addoffer px-4">Delete</button>
                                 </form>
                             </div>

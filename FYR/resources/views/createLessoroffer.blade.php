@@ -62,7 +62,7 @@
                     <div class="mb-3">
                         <label  class="form-label text-light fw-bold"><i class="fa-solid fa-chair" style="color: #fafafa;"></i> Is your proprety equipped?</label>
                         <select name="equipped" class="w-100 py-2" id="equipped">
-                            <option  value="1">Yes</option>
+                            <option  value="1" >Yes</option>
                             <option  value="0">No</option>
                         </select>
                     </div>
@@ -125,11 +125,6 @@
                         <input type="file" class="form-control" name="images[]" accept="image/*" multiple="multiple">
                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                     </div>
-                    <!-- @error('image')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                    </div> -->
-
 
 
 

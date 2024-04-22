@@ -23,7 +23,7 @@ class StoreimageRequest extends FormRequest
     {
         return [
             'image'=> 'string | required',
-            'propretie_id'=>'required'
+            'propretie_id'=>'numeric'
 
         ];
     }

@@ -15,7 +15,8 @@ Route::resource('home', RentOfferController::class);
 Route::put('dashboardRoommates/activation/{id}', [RoommateOfferController::class, 'activation'])->name('dashboardRoommates.activation');
 Route::resource('dashboardRoommates', RoommateOfferController::class);
 
-
+Route::delete('dashboardLessor/{idImg}/{id}', [PropretieController::class, 'deleteImage'])->name('delete.images');
+Route::put('dashboardLessor/activation/{id}', [PropretieController::class, 'activation'])->name('dashboardLessor.activation');
 Route::resource('dashboardLessor', PropretieController::class);
 
 

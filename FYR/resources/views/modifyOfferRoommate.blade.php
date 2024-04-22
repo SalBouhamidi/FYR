@@ -17,7 +17,7 @@
     
             <form class="container" action="{{route('dashboardRoommates.update',$offer->id )}}" method="post">
                     @csrf
-                    @Method('Put')
+                    @Method('PUT')
                     <div class="mb-3">
                         <label  class="form-label text-light fw-bold">City :</label>
                         <select name="citie_id" class="w-100 py-2" id="citie_id">

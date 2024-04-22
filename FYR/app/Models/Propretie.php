@@ -9,10 +9,12 @@ use App\Models\Citie;
 use App\Models\Image;
 use App\Models\User;
 use App\Models\Specificfourniture;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Propretie extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable=[
         'id',
         'name',
@@ -23,6 +25,7 @@ class Propretie extends Model
         'surfacearea',
         'housingtype_id',
         'citie_id',
+        'isactive',
         'user_id'
     ];
 
