@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Propretie;
+use App\Models\Roommateoffer;
+use App\Models\citie;
 
 
 class AdminController extends Controller
@@ -17,8 +19,14 @@ class AdminController extends Controller
         $statisticUser= User::all()->count();
         $statisticProprety = Propretie::all()->count();
         $statisticRoommates = User::where('role_id', '2')->count();
-        // dd($statisticRoommates);
-        return view('dashboard', compact(['statisticUser', 'statisticProprety', 'statisticRoommates']));
+
+        $Rommates = Roommateoffer::orderBy('id', 'DESC')
+        ->with('user')->with('citie')->limit(3)->get();
+        // dd($Rommates);
+        $Propreties = Propretie::orderBy('id', 'DESC')
+        ->with('citie')->limit(3)->get();
+        // dd($Propreties);
+        return view('dashboard', compact(['statisticUser', 'statisticProprety', 'statisticRoommates','Rommates', 'Propreties', 'Propreties']));
     }
 
     /**
