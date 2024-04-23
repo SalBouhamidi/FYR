@@ -88,7 +88,7 @@
                                         @endif
                                     @endforeach
                                     <div class="d-flex justify-content-center">
-                                            <a href="" class="btn  px-5 addoffer">View more</a>
+                                            <a href="{{route('dashboardRoommates.show',$offer->id)}}" class="btn  px-5 addoffer">View more</a>
                                     </div>
                                 </div>
                             </div>

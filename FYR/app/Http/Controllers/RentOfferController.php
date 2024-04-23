@@ -60,30 +60,99 @@ class RentOfferController extends Controller
         return view('createLessoroffer', compact(['cities','houstingTypes','specialFeatures']));
     }
 
+    public function validationDate($startDate, $endDate){
+        // dd('fcghjkljhgf');
+        $dateNow = Carbon::now()->toDateString();
+        $parsedCurrentDate = Carbon::parse($dateNow);
+        $parsedStartingDate = Carbon::parse($startDate);
+        $parsedEndingDate = Carbon::parse($endDate);
+        $currentYear = $parsedCurrentDate->year;
+        $startedYear = $parsedStartingDate->year;
+        $endedYear = $parsedEndingDate->year;
+
+        if($startedYear < $currentYear || $endedYear < $startedYear){
+            return false;
+        }
+        if($startedYear == $endedYear){
+            $startedMonth = $parsedStartingDate->month;
+            $endedMonth = $parsedEndingDate->month;
+            if($endedMonth < $startedMonth){
+                return false;
+            }elseif($endedMonth == $startedMonth){
+                $startedDay= $parsedStartingDate->day;
+                $endedDay= $parsedEndingDate->day;
+                if($endedDay <= $startedDay){
+                    return false;
+                }else{
+                    return true;
+                }
+            }elseif($endedMonth > $startedMonth){
+                return true;
+            }
+    }else{
+        return true;
+    }
+}
+
+    public function ReservationDuration($stated, $ended){
+        $parsedStartingDate = Carbon::parse($stated);
+        $parsedEndingDate = Carbon::parse($ended);
+        // $duration = $parsedEndingDate->diffInDays($parsedStartingDate);
+        $duration = $parsedStartingDate->diffInDays($parsedEndingDate);
+        // dd($duration);
+        if ($duration < 28){
+            return false;
+        }elseif ($duration >= 28){
+            return true;
+        }
+    }
+
 
 
     public function reservation(string $id,Request $request){
 
+
+        if(auth()->user()->id  == null){
+            return redirect()->route('loginview')->with('error', 'Dear User, You have to register before making a reservation');
+
+        }else{
         $dataValidator = $request->validate([
             'started'=> 'date|required',
             'ended' => 'date|required'
         ]);
-        // $start
-
-        
         $resultsOfValidation =$this->validationDate($dataValidator['started'],$dataValidator['ended']);
         // dd($resultsOfValidation);
         if($resultsOfValidation == false){
             return redirect()->back()->with('error', 'the date of reservation is not valid');
         }elseif($resultsOfValidation == true){
-                $reservationCheck = Reservation:: where('id', $id)
-                // ->where()
-                ->get();
-                $objectReservation= new Reservation;
-                $dataValidator['propretie_id']= $id;
-                $dataValidator['user_id']= auth()->user()->id;
-                $objectReservation->fill($dataValidator);
-                // $objectReservation->save();
+            $durationResult=$this->ReservationDuration($dataValidator['started'],$dataValidator['ended']);
+            if($durationResult == false){
+                return redirect()->back()->with('error', 'You have to reserve minimum 1 month');
+            }elseif($durationResult == true){
+                $checkAvialability = Reservation::where('propretie_id', $id)
+                ->where('started', '<=', $dataValidator['started'])
+                ->where('ended', '>', $dataValidator['started'])
+                ->orWhere('started', '>',$dataValidator['started'])
+                ->where('started', '<',$dataValidator['ended'])
+                ->first();
+                // dd($checkAvialability);
+                if($checkAvialability !== null){
+                    return redirect()->back()->with('error', 'This appartement is already reserved');
+                }else{
+                    $objectReservation= new Reservation;
+                    $dataValidator['propretie_id']= $id;
+                    // dd(auth()->user());
+                    $dataValidator['user_id']= auth()->user()->id;
+                    $objectReservation->fill($dataValidator);
+                    $objectReservation->save();
+                    // dd($objectReservation);
+                    return redirect()->back()->with('success', 'Your reservation is made successfully');
+
+                }
+            }
+        }
+
+
         }
         
 
@@ -114,37 +183,7 @@ class RentOfferController extends Controller
         return view('detailsProprety', compact(['proprety']));
 
     }
-    public function validationDate($startDate, $endDate){
-        // dd('fcghjkljhgf');
-        $dateNow = Carbon::now()->toDateString();
-        $parsedCurrentDate = Carbon::parse($dateNow);
-        $parsedStartingDate = Carbon::parse($startDate);
-        $parsedEndingDate = Carbon::parse($endDate);
-        $currentYear = $parsedCurrentDate->year;
-        $startedYear = $parsedStartingDate->year;
-        $endedYear = $parsedEndingDate->year;
 
-        if($startedYear < $currentYear || $endedYear < $startedYear){
-            return false;
-        }
-        if($startedYear == $endedYear){
-            $startedMonth = $parsedStartingDate->month;
-            $endedMonth = $parsedEndingDate->month;
-            if($endedMonth < $startedMonth){
-                return false;
-            }elseif($endedMonth == $startedMonth){
-                $startedDay= $parsedStartingDate->day;
-                $endedDay= $parsedEndingDate->day;
-                if($endedDay <= $startedDay){
-                    return false;
-                }else{
-                    return true;
-                }
-            }
-    }else{
-        return true;
-    }
-}
    
 
 }
