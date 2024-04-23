@@ -62,9 +62,12 @@ class RoommateOfferController extends Controller
      */
     public function show(string $id)
     {
-        $roommate= Roommateoffer::where('id', $id)->first();
-
-
+        $roommate= Roommateoffer::where('id', $id)
+        ->with('user')
+        ->with('citie')
+        ->with('housingtype')
+        ->first();
+        // dd($roommate->address);
         return view('detailsRoommate', compact(['roommate']));
     }
 

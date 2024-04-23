@@ -14,7 +14,7 @@
         <div class="bg-sucess ms-2  mb-5">
             <p class="text-light fw-bold ms-2 d-flex gap-3">
             <i class="fa-solid fa-location-dot text-light mt-1"></i>Address: {{$proprety->address}}</p>
-            <p class="text-light fw-bold ms-2 d-flex gap-3"><i class="fa-solid fa-calendar-days mt-1"></i> duration of reservation: Minimum 1 month </p>
+            <p class="text-light fw-bold ms-2 d-flex gap-3"><i class="fa-solid fa-calendar-days mt-1"></i> Duration of reservation: Minimum 1 month </p>
             <p class="text-light fw-bold ms-2 d-flex gap-3"><i class="fa-solid fa-ruler-combined" style="color: #ffffff;"></i> Surface Area: {{$proprety->surfacearea}}</p>
             <p class="text-light fw-bold ms-2 d-flex gap-3 "><i class="fa-solid fa-chair  mt-1"></i>Equiped :
             @if($proprety->equipped == 1)
@@ -82,8 +82,6 @@
 
                     <hr class="mb-3"> 
                     <p class= "fw-bold mb-3"id="Totalprice">Total Price : </p>
-
-               
                 <button type="submit" class="text-light btn-add rounded  border-0 px-2 py-2 mb-5">Reserve</button>
                 </form>
 

@@ -5,14 +5,19 @@ use App\Http\Controllers\RoommateOfferController;
 use App\Http\Controllers\PropretieController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RentOfferController;
+use App\Http\Controllers\AdminController;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('dashboard', AdminController::class);
+
+
 Route::post('reservation/{id}', [RentOfferController::class, 'reservation'])->name('reservation.proprety');
 Route::resource('home', RentOfferController::class);
+
 
 Route::put('dashboardRoommates/activation/{id}', [RoommateOfferController::class, 'activation'])->name('dashboardRoommates.activation');
 Route::resource('dashboardRoommates', RoommateOfferController::class);
