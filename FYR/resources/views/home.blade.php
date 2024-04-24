@@ -10,8 +10,8 @@
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                <img src="{{asset('images/rhil.jpg')}}" style="height:40rem" class="d-block w-100" alt="...">
+                <div class="carousel-item active ">
+                <img src="{{asset('images/rhil.jpg')}}" style="height:40rem" class="  d-block w-100 " alt="...">
                 </div>
                 <div class="carousel-item">
                 <img src="{{asset('images/chillinghome.jpg')}}" style="height:40rem" class="d-block w-100" alt="...">
@@ -35,12 +35,12 @@
         <nav class="navbar navbarsearch">
         <div class="container-fluid w-100 d-flex  justify-content-around flex-row">
             <a class="navbar-brand text-wrap text-light fw-semibold w-25">Find roommates and room that match your life style</a>
-            <form class="d-flex w-50" role="search">
-                <input class="form-control me-2" type="search" placeholder="|| Search" aria-label="Search">
+            <form class="searchform d-flex w-25  "  role="search">
+                <input class="searchbar form-control col-md-6 col-12  me-2" type="search" placeholder="|| Search" aria-label="Search">
                 <button class="btn btn_search" type="submit">Search</button>
             </form>
-                    <a href="" class="text-light fw-semibold text-decoration-none">Home</a>
-                    <a href="" class="text-light fw-semibold text-decoration-none">Rommates</a>
+                    <a href="" class="text-searching text-light fw-semibold text-decoration-none">Home</a>
+                    <a href="" class="text-searching text-light fw-semibold text-decoration-none">Rommates</a>
        
         </div>
         </nav>
@@ -69,11 +69,10 @@
             <p class="fw-bold text-decoration-underline ">See more</p>
         </div>
 
-        <div class="content container-fluid d-flex flex-wrap gap-5 justify-content-center">
+        <div class="content container-fluid d-flex flex-wrap gap-5 justify-content-center ">
                 @if($Rommates !== null)
                         @foreach($Rommates as $offer)
                             <div class="card" style="width: 21rem;">
-
                             @if($offer->user->gender === 0)
                                 <img src="{{asset('images\boy.png')}}" class="card-img-top" alt="user image">
                             @elseif($offer->user->gender === 1)
@@ -116,8 +115,7 @@
         <div class="content container-fluid d-flex flex-wrap gap-5 justify-content-center">
                 @if($Propreties !== null)
                         @foreach($Propreties as $proprety)
-                        <div class="card" style="width: 21rem;">
-
+                        <div class="card rounded" style="width: 21rem;">
                             <div id="carouselExampleAutoplaying{{$proprety->id}}" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     @foreach($proprety->images as $indexImg => $image)
@@ -202,6 +200,7 @@
 
     .RoommateOffer {
         min-height: 150vh;
+
     }
 
     .card {
@@ -226,6 +225,38 @@
         border-style: solid;
         border-color:rgba(217, 217, 217, 1);
     }
+    @media (max-width:600px){
+        body{
+            overflow-x:hidden !important;
+        }
+        .decorationimg{
+            display:none;
+        }
+        .hero-section, .navbar-brand, .text-searching{
+            display:none;
+        }
+        .searchbar{
+            width:75% !important;
+        }
+        .searchform{
+            width:100% !important;
+        }
+        .attractivesection{
+            width:100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .attractivesection_image, .attractivesection_text{
+            width:100%;
+        }
+        .attractivesection_text{
+            text-align:center;
+            margin-left:3rem;
+        }
+    
+    }
+    
 </style>
 
 

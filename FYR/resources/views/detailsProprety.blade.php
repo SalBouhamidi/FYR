@@ -5,7 +5,7 @@
 
 <a class="navbar-brand w-25 text-light fw-bold fs-4 ms-2" href="#">Welcome to F<span style="color:rgba(115, 45, 158, 1)">Y</span>R</a>
 
-<section class="container d-flex gap-4">
+<section class="Propretysection container d-flex gap-4">
     <div class="w-75 proprety-details">
         <p class="fw-bold text-light fs-4 text-center">Name of proprety: {{$proprety->name}}</p>
         <div class="band" style="with:10rem">
@@ -60,7 +60,7 @@
                         </div>
         </div>  
     </div>
-    <div class="w-25 bg-light border border-light">
+    <div class="reservationsection w-25 bg-light border border-light">
          <p class= "fw-bold text-center">Reservation</p>
          <hr class="mb-3">
 
@@ -127,7 +127,18 @@
     .content {
     min-height: calc(100% );
     padding-bottom: 50px; 
-}
+    }
+    @media (max-width:600px){
+     .Propretysection{
+        flex-direction: column;
+     }
+     .proprety-details{
+        width:100% !important;
+     }
+     .reservationsection{
+        width:100% !important;
+     }
+    }
 
 </style>
 

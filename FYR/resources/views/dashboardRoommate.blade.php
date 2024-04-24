@@ -7,13 +7,13 @@
         <section class="navbarsearch mb-3">
                 <nav class="navbar navbarsearch">
                 <div class="container-fluid w-100 d-flex  justify-content-around flex-row">
-                    <a class="navbar-brand text-wrap text-light fw-semibold w-25">Find roommates and room that match your life style</a>
-                    <form class="d-flex w-50" role="search">
-                        <input class="form-control me-2" type="search" placeholder="|| Search" aria-label="Search">
+                    <a class="text-searching navbar-brand text-wrap text-light fw-semibold w-25">Find roommates and room that match your life style</a>
+                    <form class="searchform d-flex w-50 " role="search">
+                        <input class="searchbar form-control me-2" type="search" placeholder="|| Search" aria-label="Search">
                         <button class="btn btn_search" type="submit">Search</button>
                     </form>
-                            <a href="" class="text-light fw-semibold text-decoration-none">Home</a>
-                            <a href="" class="text-light fw-semibold text-decoration-none">Rommates</a>
+                            <a href="" class="text-searching text-light fw-semibold text-decoration-none">Home</a>
+                            <a href="" class="text-searching text-light fw-semibold text-decoration-none">Rommates</a>
                 </div>
                 </nav>
 
@@ -21,9 +21,9 @@
 
 
         <section class="RoommateOffer">
-           <div class="d-flex justify-content-end me-5 mb-4 gap-2">
+           <div class="buttonRoommateOffer d-flex justify-content-end me-5 mb-4 gap-2">
                 <a href="{{route('dashboardRoommates.create')}}" class="btn  px-5 addoffer">Add New Offer </a>
-                <a href="{{route('show.profil')}}" class="btn  px-5 addoffer">View my profil </a>
+                <a href="{{route('show.profil')}}" class="viewprofil btn  px-5 addoffer">View my profil </a>
 
             </div>
             <div class="content container-fluid d-flex flex-wrap gap-5 justify-content-center">
@@ -124,6 +124,29 @@
     border-style: solid;
     border-color:rgba(217, 217, 217, 1);
 }
+@media (max-width:600px){
+     .text-searching{
+        display:none;
+     }
+     .searchform{
+        width:100% !important;
+    }
+     .searchbar{
+        width:75% !important;
+     }
+     .text-searching{
+        display:none;
+     }
+     .buttonRoommateOffer{
+        height:6vh;
+        display: flex;
+        justify-content:center;
+        width:100%
+     }
+     .viewprofil{
+        margin-right:2%
+     }
+    }
 </style>
 
 

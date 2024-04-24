@@ -20,15 +20,20 @@ class RoommateOfferController extends Controller
      */
     public function index()
     {
-        // dd('text');
-        $roommateOffers = Roommateoffer::where('user_id', auth()->user()->id)->get();
-        $user = User::where('id',auth()->user()->id)->first();
-        // dd($user->gender);
-        $cities = Citie::get();
-        
+        if(auth()->user() == null){
+            return redirect()->route('loginview')->with('error', 'You have to login before you check your future roommates details');
 
-        // dd($roommateOffers[0]);
-        return view('dashboardRoommate', compact(['roommateOffers', 'user','cities']));
+        }else{
+            $roommateOffers = Roommateoffer::where('user_id', auth()->user()->id)->get();
+            $user = User::where('id',auth()->user()->id)->first();
+            $cities = Citie::get();
+            
+    
+            // dd($roommateOffers[0]);
+            return view('dashboardRoommate', compact(['roommateOffers', 'user','cities']));
+
+        }
+
     }
 
 

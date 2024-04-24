@@ -2,10 +2,10 @@
 @section('content')
 <section class="container-fluid">
     <div class="card mb-3" style="max-width: 100%;">
-        <div class="row g-0">
+        <div class="detailsSec row g-0">
             <div class="col-md-4">
                 @if($user->image !== null)
-                <img src="{{asset('storage/'.$user->image)}}" class="img-fluid rounded-start"  alt="Image of user">
+                <img src="{{asset('storage/'.$user->image)}}" class="img-fluid rounded-start h-100"  alt="Image of user">
                 @elseif($user->image === null)
                     @if($user->gender === 1)
                         <img src="{{asset('images\girl.png')}}" class="img-fluid rounded-start" alt="image of vector">
@@ -163,6 +163,11 @@
     }
     .modal-content{
         background-color:rgba(115, 45, 158, 1);
+    }
+    @media (max-width:600px){
+     .detailsSec{
+        width:100%;
+     }
     }
 </style>
 

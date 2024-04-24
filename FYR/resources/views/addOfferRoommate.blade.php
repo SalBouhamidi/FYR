@@ -10,7 +10,7 @@
 
     <h3 class="text-light text-center text-decoration-underline">Let's find you a Roommate !</h3>
 
-    <div class="d-flex">
+    <div class="d-flex decorationcreate">
 
     <div class="w-50">
             <form class="container" action="{{route('dashboardRoommates.store')}}" method="post">
@@ -124,9 +124,12 @@
     }
     .AddOffer form input, .AddOffer form select{
         background-color:rgba(240, 240, 240, 1);
-        /* color:#D8BFD8; */
-        /* rgba(240, 240, 240, 1) */
-        /* rgba(180, 180, 180, 1) */
+    }
+    @media (max-width:600px){
+        {
+        display: flex;
+        justify-content:center;
+     }
     }
 </style>
 @endsection('content')

@@ -38,22 +38,23 @@
 </section>
 <section class="container">
     <h3 class="text-light mb-5">Statistics :</h3>
-    <div class="d-flex flex-row justify-content-between">
-        <div class="card h-25 mb-3 px-5 d-flex justify-content-center align-items-center" style="height:5rem !important; width: 18rem; ">
+    <div class="statisticscontainer d-flex flex-row justify-content-between ">
+        <div class="statisticCard card h-25 mb-3 px-5 d-flex justify-content-center align-items-center" style="height:5rem !important; width: 18rem; ">
             <p class="text fw-bold text-center fs-5">User: {{$statisticUser}}</p>
         </div>
-        <div class="card h-25 mb-3 px-5" style="width: 18rem;">
+        <div class="statisticCard card h-25 mb-3 px-5" style="width: 18rem; height:5rem !important;">
             <p class="text  fw-bold text-center fs-5">Number of proprities: {{$statisticProprety}}</p>
         </div>
-        <div class="card h-25 mb-3 px-5" style="width: 18rem;">
+        <div class="statisticCard card h-25 mb-3 px-5" style="width: 18rem;height:5rem !important;">
             <p class="text fw-bold text-center fs-5">Number of Roommates: {{$statisticRoommates}}</p>
         </div>
     </div>
-    <div>
+
+    <div class=''>
     <h3 class="text-light mb-5">New offer Roommates:</h3>
 
     <div>
-    <div class="content container-fluid d-flex flex-wrap rounded justify-content-between">
+    <div class="content roommateoffercontainer container-fluid d-flex flex-wrap rounded justify-content-between">
                 @if($Rommates !== null)
                         @foreach($Rommates as $offer)
                             <div class="cardroommates p-2" style="width: 21rem;">
@@ -90,16 +91,16 @@
     <div class="mt-5">
     <h3 class="text-light mb-5">New Rent offer:</h3>
 
-    <div class="content container-fluid d-flex flex-wrap  justify-content-between">
+    <div class="propretyoffercontainer content container-fluid d-flex flex-wrap  justify-content-between">
                 @if($Propreties !== null)
                         @foreach($Propreties as $proprety)
-                        <div class="cardroommates p-2" style="width: 21rem;">
+                        <div class="cardroommates pb-3" style="width: 21rem;">
 
                             <div id="carouselExampleAutoplaying{{$proprety->id}}" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     @foreach($proprety->images as $indexImg => $image)
-                                    <div class="carousel-item {{$image->id}} {{$indexImg == 0 ? 'active' : ''}}  h-50">
-                                        <img src="{{asset($image->image)}}"  class="d-block w-100 card-img-top" style="height:18rem;" alt="Rent propriety">
+                                    <div class="carousel-item  {{$image->id}} {{$indexImg == 0 ? 'active' : ''}}  h-50">
+                                        <img src="{{asset($image->image)}}"  class="d-block w-100 card-img-top rounded" style="height:18rem;" alt="Rent propriety">
                                     </div>
                                     @endforeach
                                 </div>
@@ -115,10 +116,10 @@
                                 </button>
                             </div>                                
                         <div class="card-body">    
-                                    <p class="card-text  text-light fw-bold">Address: {{$proprety->address}}, {{$proprety->citie->name}}</p>
-                                    <p class="card-text  text-light fw-bold">Price: {{$proprety->price}} Dh</p>
+                                    <p class="card-text  text-light fw-bold ms-2">Address: {{$proprety->address}}, {{$proprety->citie->name}}</p>
+                                    <p class="card-text  text-light fw-bold ms-2">Price: {{$proprety->price}} Dh</p>
                                     <div class="d-flex justify-content-center">
-                                            <a href="" class="btn  px-5 addoffer">Block</a>
+                                    <a href="" class="btn  px-5 addoffer">Block</a>
                                     </div>
                                 </div>
                             </div>
@@ -156,6 +157,7 @@
         color:rgba(115, 45, 158, 1);
     }
     .cardroommates {
+        border-radius: 15px !important;
         background-color: rgba(115, 45, 158, 1);
         transform: scale(1);
     }
@@ -176,6 +178,30 @@
         background-color:rgba(115, 45, 158, 1);
         border-style: solid;
         border-color:rgba(217, 217, 217, 1);
+    }
+    @media (max-width:600px){
+        .statisticscontainer{
+            height:30vh;
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: center !important;
+            /* background:red; */
+
+        }
+        .statisticCard{
+            height:15vh;
+            /* background:red; */
+        }
+        .roommateoffercontainer{
+            grid-gap:2vh;
+            display:flex;
+            justify-content: center !important;
+        }
+        .propretyoffercontainer{
+            grid-gap:2vh;
+            display:flex;
+            justify-content: center !important;
+        }
     }
 </style>
 @endsection('content')

@@ -1,11 +1,11 @@
 @extends('layouts.navbar')
 @section('content')
 
-<main class="content container">
+<main class="contentRoommate container">
 
 <a class="navbar-brand w-25 text-light fw-bold fs-4 ms-2" href="#">Welcome to F<span style="color:rgba(115, 45, 158, 1)">Y</span>R</a>
 
-<section class="container d-flex gap-4">
+<section class="Roommatedescription container d-flex gap-4">
     <div class="w-75 proprety-details">
         <p class="fw-bold text-light fs-4 text-center">Name of roommate: {{$roommate->user->name}}</p>
         <div class="band" style="with:10rem">
@@ -30,17 +30,24 @@
                 <p class="bg-light text-danger fw-bold">Attention: Make sure to take her or his Id's information before moving to live with them </p>
             </div>
             <div class='d-flex justify-content-center'>
-                <img src="{{asset('images/girl.png')}}" alt="">
+                @if($roommate->user->image !== null)
+                    <img src="{{asset('storage/'.$roommate->user->image)}}" class="img-fluid rounded-start h-100"  alt="Image of user">
+                @else
+                    @if($roommate->gender == 1)
+                        <img src="{{asset('images/girl.png')}}" class="img-fluid" alt="">
+                    @elseif($roommate->gender == 0)
+                        <img src="{{asset('images/boy.png')}}" class="img-fluid" alt="">
+                @endif
+                @endif
+              
+
             </div>  
     </div>       
-    <div class=" h-25 bg-light border border-light" style="width:20rem">
+    <div class="contantsection h-25 bg-light border border-light" style="width:20rem">
         <p class= "fw-bold text-center mb-5">Contact</p>
-        <div class="d-flex flex-row "><p class="card-text ms-2 fw-bold"  style="color: #000000;"><i class="fa-brands fa-whatsapp fw-bold" style="color: #32e42f;"></i> Whatssap:</p><a class="card-text ms-4 fw-bold text-decoration-none " target="_blank" style="color: #000000;" href="https://wa.me/{{$roommate->user->whatssap}}">{{$roommate->user->whatssap}}</a></div>
-        <p class="card-text fw-bold ms-1"  style="color: #000000;"><i class="fa-solid fa-phone-volume"></i> Telephone : {{$roommate->user->whatssap}}</a></p>
-        <p class="card-text fw-bold ms-1"  style="color: #000000;"><i class="fa-solid fa-envelope" style="color: #000000;"></i> Email: {{$roommate->user->email}}</a></p>
-
-
-
+        <div class="d-flex flex-row "><p class="card-text ms-2 fw-bold text-light" ><i class="fa-brands fa-whatsapp fw-bold" style="color: #32e42f;"></i> Whatssap:</p><a class="card-text ms-4 fw-bold text-decoration-none text-light" target="_blank" style="color: #000000;" href="https://wa.me/{{$roommate->user->whatssap}}">{{$roommate->user->whatssap == null ? 'Not avialable': $roommate->user->whatssap }}</a></div>
+        <p class="card-text fw-bold ms-1 text-light"  ><i class="fa-solid fa-phone-volume" style="color: #000000;"></i> Telephone : {{$roommate->user->phone == null ? 'Not avialble': $roommate->user->phone}}</a></p>
+        <p class="card-text fw-bold ms-1 text-light"  style="color: #000000;"><i class="fa-solid fa-envelope" style="color: #000000;"></i> Email: {{$roommate->user->email}}</a></p>
         <hr class="mb-3">        
                              
 
@@ -83,6 +90,28 @@
     .content {
     min-height: calc(100% );
     padding-bottom: 50px; 
+    }
+    .contantsection{
+        background:linear-gradient(rgba(115, 45, 158, 1), rgba(0, 0, 0, 1));
+    }
+
+
+@media (max-width:600px){
+    .decorationimg{
+            display:none;
+    }
+    .Roommatedescription{
+        flex-direction: column;
+        width:100%
+    }
+    .proprety-details{
+        width:100% !important;
+    }
+    .contantsection{
+        width:100% !important;
+        background:linear-gradient(rgba(115, 45, 158, 1), rgba(0, 0, 0, 1));
+    }
+
 }
 
 </style>
