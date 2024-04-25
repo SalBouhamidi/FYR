@@ -86,33 +86,33 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $user = User::where('email', $request->email)->first();
-
-        // if($user == null){
-        //     dd('user');
-        //     return redirect('login')->with('Error', 'The email is not registered,check it agian or create an account if you don\'t have one');
-        // }
-  
-            $validatedata = $request->validate([
-                'email' => 'required',
-                'password' =>'required',
-            ]);
-
-        if(Auth::attempt($validatedata)){
-            session([
-                'name' => $user->name,
-                'role_id' =>$user->role_id,
-                'id' =>$user->id,
-            ]);
-            // dd($user->role_id);
-            if($user->role_id == 2){
-                return redirect()->route('home.index')->with('succesRoommate', 'You have been logged in');
-            }else if($user->role_id == 3){
-                return redirect()->route('home.index')->with('succesRoommate', 'You have been logged in');
-            }
-
+        if($user == null){
+            return back()->with('error', 'Make sure you register before login');
         }else{
-            return back()->with('Error','Invalid email or password');
-        }
+
+        $validatedata = $request->validate([
+            'email' => 'required',
+            'password' =>'required',
+        ]);
+
+                if(Auth::attempt($validatedata) == true){
+                    session([
+                        'name' => $user->name,
+                        'role_id' =>$user->role_id,
+                        'id' =>$user->id,
+                    ]);
+                    if($user->role_id == 2){
+                        return redirect()->route('home.index')->with('success', 'You have been logged in');
+                    }else if($user->role_id == 3){
+                        return redirect()->route('dashboardLessor.index')->with('success', 'You have been logged in');
+                    }
+                }else{
+                    return redirect()->back()->with('Error', 'Invalid email or password');
+                }
+                }
+
+     
+
 
     }
 

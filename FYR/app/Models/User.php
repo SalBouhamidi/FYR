@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Roommateoffer;
+use App\Models\Role;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class User extends Authenticatable
 {
@@ -37,6 +40,10 @@ class User extends Authenticatable
     public function Propreties()
     {
         return $this->belongsToMany(Propretie::class, 'reservation');
+    }
+    public function Role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
     }
 
     /**

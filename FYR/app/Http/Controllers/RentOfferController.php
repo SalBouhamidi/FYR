@@ -49,6 +49,16 @@ class RentOfferController extends Controller
         return view('home', compact(['Rommates', 'cities','Propreties']));
     }
 
+    public function search(Request $request){
+        $searchName = $request->input('searchstring');
+        $results = Roommateoffer::where('name','like', '%'.$searchName.'%')->get();
+        $response = '';
+        foreach ($results as $result) {
+            $response .= '<div>' . $result->name . '</div>';
+        }
+        return $response;
+    }
+
     /**
      * Show the form for creating a new resource.
      */

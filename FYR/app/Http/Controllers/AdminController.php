@@ -25,8 +25,41 @@ class AdminController extends Controller
         // dd($Rommates);
         $Propreties = Propretie::orderBy('id', 'DESC')
         ->with('citie')->limit(3)->get();
-        // dd($Propreties);
         return view('dashboard', compact(['statisticUser', 'statisticProprety', 'statisticRoommates','Rommates', 'Propreties', 'Propreties']));
+    }
+    public function users(){
+        $users = User::all();
+        return view('dashboardUsers', compact(['users']));
+    }
+
+    public function changerole(string $id){
+        // dd('hello');
+        $user= User::where('id', $id)->first();
+        if($user->role_id == 2){
+            $user->update([
+                'role_id'=> 3
+            ]); 
+            // dd($user);
+            return back()->with('success', 'the user is Lessor now');
+        }elseif($user->role_id == 3){
+            $user->update([
+                'role_id'=> 2
+            ]); 
+            return back()->with('success', 'the role of user is roommate now');
+        }
+
+    }
+
+
+    public function statistics(){
+        $propreties = Propretie::all()->count();
+        $azrouPropreties = Propretie::where('citie_id', '1')->get()->count();
+        $meknesPropreties = Propretie::where('citie_id', '2')->get()->count();
+        $TangerPropreties = Propretie::where('citie_id', '3')->get()->count();
+        // dd($meknesPropreties);
+
+
+        return view('dashboardStatistics');
     }
 
     /**

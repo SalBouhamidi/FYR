@@ -1,4 +1,4 @@
-<footer class=" footer row row-cols-1 row-cols-sm-2 row-cols-md-5 me-0 mb-0 mt-5">
+<footer class=" footer  row row-cols-1 row-cols-sm-2 row-cols-md-5 me-0 mb-0 mt-5">
     <div class="col mb-3 mt-5">
      <p class="fs-3 fw-bold ms-3 text-light">F<span class="spanLogo">Y</span>R</p>
     </div>

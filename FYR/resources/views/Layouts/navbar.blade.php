@@ -37,7 +37,7 @@
     @yield('content')
     @extends('layouts.footer')
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="{{'resources/js/app.js'}}"></script>
 
 </body>
 </html>

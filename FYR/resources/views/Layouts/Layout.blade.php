@@ -16,8 +16,9 @@
     @yield('content')
     
     
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @include('layouts.footer')
+<script src="https://cdnjs.com/libraries/Chart.js"></script>
+
 
 </body>
 </html>

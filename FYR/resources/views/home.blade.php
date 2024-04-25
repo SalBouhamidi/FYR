@@ -35,14 +35,14 @@
         <nav class="navbar navbarsearch">
         <div class="container-fluid w-100 d-flex  justify-content-around flex-row">
             <a class="navbar-brand text-wrap text-light fw-semibold w-25">Find roommates and room that match your life style</a>
-            <form class="searchform d-flex w-25  "  role="search">
-                <input class="searchbar form-control col-md-6 col-12  me-2" type="search" placeholder="|| Search" aria-label="Search">
+            <div class="searchform d-flex w-25"   role="search">
+                <input class="searchbar form-control col-md-6 col-12  me-2" id="inputSearch" onkeyup="showResult()" type="search" placeholder="|| Search" aria-label="Search">
                 <button class="btn btn_search" type="submit">Search</button>
-            </form>
-                    <a href="" class="text-searching text-light fw-semibold text-decoration-none">Home</a>
-                    <a href="" class="text-searching text-light fw-semibold text-decoration-none">Rommates</a>
-       
-        </div>
+                <div id="searchResult"></div>
+            </div>
+                <a href="" class="text-searching text-light fw-semibold text-decoration-none">Home</a>
+                <a href="" class="text-searching text-light fw-semibold text-decoration-none">Rommates</a>
+            </div>
         </nav>
 
 </section>
@@ -166,6 +166,29 @@
     
 
 </section>
+<script>
+    function showResult() {
+        // if (str.length==0) {
+        //     document.getElementById("searchResult").innerHTML="";
+        //     document.getElementById("searchResult").style.border="0px";
+        //     return;
+        // }
+        var searchInput= document.getElementById("inputSearch").value
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+            if (this.readyState==4 && this.status==200) {
+            document.getElementById("searchResult").innerHTML= xmlhttp.responseText;
+            document.getElementById("searchResult").style.border="1px solid #A5ACB2";
+            };
+            
+        }
+        xmlhttp.open("GET","/search?searchstring="+str,true);
+        xmlhttp.send();
+}
+
+</script>
+
+<script type="text/javascript" src="{{URL::asset('js/app.js')}}"></script>
 
 
 

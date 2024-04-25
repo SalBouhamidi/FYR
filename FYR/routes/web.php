@@ -12,9 +12,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('dashboard/statistics', [AdminController::class, 'statistics'])->name('dashboard.statistics');
+Route::get('dashboard/users/{id}', [AdminController::class, 'changerole'])->name('change.role');
+Route::get('dashboard/users', [AdminController::class, 'users'])->name('users.manipulation');
 Route::resource('dashboard', AdminController::class);
 
-
+Route::get('search', [RentOfferController::class, 'search'])->name('search.roommate');
 Route::post('reservation/{id}', [RentOfferController::class, 'reservation'])->name('reservation.proprety');
 Route::resource('home', RentOfferController::class);
 
