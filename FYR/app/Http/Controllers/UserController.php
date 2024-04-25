@@ -46,9 +46,6 @@ class UserController extends Controller
             'gender' => 'required'
 
         ]);
-
-
-
             $user= User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -62,17 +59,11 @@ class UserController extends Controller
                 'id' =>$user->id,
 
             ]);
-            // dd(session());
             if($user){
                 return redirect('/login')->with('succes', 'you have been registred successfully, Please log in');
             }else{
                 return redirect('/register')->with('error', 'something went wrong');
             }
-    
-       
-        
-        
-
     }
 
     /**
@@ -94,7 +85,6 @@ class UserController extends Controller
             'email' => 'required',
             'password' =>'required',
         ]);
-
                 if(Auth::attempt($validatedata) == true){
                     session([
                         'name' => $user->name,
@@ -110,10 +100,6 @@ class UserController extends Controller
                     return redirect()->back()->with('Error', 'Invalid email or password');
                 }
                 }
-
-     
-
-
     }
 
     /**
